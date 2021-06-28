@@ -1,6 +1,6 @@
+use std::collections::{HashMap, HashSet};
 use std::fs::File;
 use std::io::{BufRead, BufReader};
-use std::collections::{HashMap, HashSet};
 
 const INPUT: &str = "./input/day01.txt";
 const SUM: i32 = 2020;
@@ -19,7 +19,7 @@ fn part1() -> i32 {
         let opposite = SUM - num;
 
         if set.contains(&opposite) {
-            return num*opposite;
+            return num * opposite;
         }
 
         set.insert(num);
@@ -36,9 +36,9 @@ fn part2() -> i32 {
     let reader = BufReader::new(file);
     for (_i, line) in reader.lines().enumerate() {
         let num: i32 = line.unwrap().parse().unwrap();
-        
+
         list.push(num);
-        
+
         if entries.contains_key(&num) {
             *entries.get_mut(&num).unwrap() += 1;
         } else {

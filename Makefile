@@ -1,3 +1,7 @@
+exec:
+	cargo fmt
+	cargo run
+
 build:
 	cargo build
 
@@ -6,3 +10,6 @@ run:
 
 test:
 	cargo test
+
+fmt:
+	cargo fmt
