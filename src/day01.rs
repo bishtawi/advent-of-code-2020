@@ -6,8 +6,8 @@ const INPUT: &str = "./input/day01.txt";
 const SUM: i32 = 2020;
 
 pub fn solve() {
-    println!("{}", part1());
-    println!("{}", part2());
+    println!("Day 01a: {}", part1());
+    println!("Day 01b: {}", part2());
 }
 
 fn part1() -> i32 {

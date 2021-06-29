@@ -11,8 +11,8 @@ struct Entry {
 }
 
 pub fn solve() {
-    println!("{}", part1());
-    println!("{}", part2());
+    println!("Day 02a: {}", part1());
+    println!("Day 02b: {}", part2());
 }
 
 fn part1() -> i32 {
