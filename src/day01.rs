@@ -2,12 +2,11 @@ use std::collections::{HashMap, HashSet};
 use std::fs::File;
 use std::io::{BufRead, BufReader};
 
-const INPUT: &str = "./input/day01.txt";
+const INPUT: &str = "input/day01.txt";
 const SUM: i32 = 2020;
 
 pub fn solve() {
-    println!("Day 01a: {}", part1());
-    println!("Day 01b: {}", part2());
+    println!("{}: {} | {}", INPUT, part1(), part2());
 }
 
 fn part1() -> i32 {

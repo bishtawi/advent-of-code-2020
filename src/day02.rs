@@ -1,7 +1,7 @@
 use std::fs::File;
 use std::io::{BufRead, BufReader};
 
-const INPUT: &str = "./input/day02.txt";
+const INPUT: &str = "input/day02.txt";
 
 struct Entry {
     lower_bound: u64,
@@ -11,8 +11,7 @@ struct Entry {
 }
 
 pub fn solve() {
-    println!("Day 02a: {}", part1());
-    println!("Day 02b: {}", part2());
+    println!("{}: {} | {}", INPUT, part1(), part2());
 }
 
 fn part1() -> i32 {

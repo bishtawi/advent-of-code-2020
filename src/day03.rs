@@ -1,11 +1,10 @@
 use std::fs::File;
 use std::io::{BufRead, BufReader};
 
-const INPUT: &str = "./input/day03.txt";
+const INPUT: &str = "input/day03.txt";
 
 pub fn solve() {
-    println!("Day 03a: {}", part1());
-    println!("Day 03b: {}", part2());
+    println!("{}: {} | {}", INPUT, part1(), part2());
 }
 
 fn part1() -> i32 {
