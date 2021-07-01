@@ -200,7 +200,7 @@ fn parse() -> Vec<Passport> {
                 "ecl" => last.ecl = val,
                 "pid" => last.pid = val,
                 "cid" => last.cid = val,
-                _ => assert!(false),
+                _ => panic!(),
             }
         }
     }
