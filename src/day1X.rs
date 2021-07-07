@@ -1,7 +1,7 @@
 use std::fs::File;
 use std::io::{BufRead, BufReader};
 
-const INPUT: &str = "input/day0X.txt";
+const INPUT: &str = "input/day1X.txt";
 
 pub fn solve() {
     println!("{}: {} | {}", INPUT, part1(), part2());
