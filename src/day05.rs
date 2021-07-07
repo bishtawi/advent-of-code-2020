@@ -18,12 +18,13 @@ fn part1() -> i32 {
             max = seat;
         }
     }
-    return max;
+
+    max
 }
 
 fn part2() -> i32 {
     let mut seats = parse();
-    seats.sort();
+    seats.sort_unstable();
 
     for (i, seat) in seats.iter().enumerate() {
         if i > 0 && seat - 1 != seats[i - 1] {
@@ -31,7 +32,7 @@ fn part2() -> i32 {
         }
     }
 
-    return -1;
+    -1
 }
 
 fn parse() -> Vec<i32> {
@@ -70,5 +71,5 @@ fn parse() -> Vec<i32> {
         seats.push(low_row * 8 + low_col);
     }
 
-    return seats;
+    seats
 }

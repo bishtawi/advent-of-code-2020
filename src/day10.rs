@@ -11,12 +11,12 @@ pub fn solve() {
         .lines()
         .map(|line| line.unwrap().parse().unwrap())
         .collect();
-    jolts.sort();
+    jolts.sort_unstable();
 
     println!("{}: {} | {}", INPUT, part1(&jolts), part2(&jolts));
 }
 
-fn part1(jolts: &Vec<i32>) -> i32 {
+fn part1(jolts: &[i32]) -> i32 {
     let mut curr_jolt: i32 = 0;
     let mut one_jolt: i32 = 0;
     let mut three_jolt: i32 = 1;
@@ -32,10 +32,10 @@ fn part1(jolts: &Vec<i32>) -> i32 {
         curr_jolt = *jolt;
     }
 
-    return one_jolt * three_jolt;
+    one_jolt * three_jolt
 }
 
-fn part2(jolts: &Vec<i32>) -> u64 {
+fn part2(jolts: &[i32]) -> u64 {
     let mut mem: HashMap<i32, u64> = HashMap::new();
     mem.insert(jolts.last().unwrap() + 3, 1);
     for jolt in jolts.iter().rev() {
@@ -53,13 +53,13 @@ fn part2(jolts: &Vec<i32>) -> u64 {
         .iter()
         .fold(0, |a, d| if let Some(v) = mem.get(&d) { a + v } else { a });
 
-    return total;
+    total
 
     // Recursion is too slow for the puzzle input
     // return part2_recursive(jolts, 0, 0);
 }
 
-fn _part2_recursive(jolts: &Vec<i32>, start_index: usize, curr_jolt: i32) -> u64 {
+fn _part2_recursive(jolts: &[i32], start_index: usize, curr_jolt: i32) -> u64 {
     if start_index >= jolts.len() {
         return 1;
     }
@@ -72,5 +72,5 @@ fn _part2_recursive(jolts: &Vec<i32>, start_index: usize, curr_jolt: i32) -> u64
         total += _part2_recursive(jolts, i + 1, jolts[i]);
     }
 
-    return total;
+    total
 }

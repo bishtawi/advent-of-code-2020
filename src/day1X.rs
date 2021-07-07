@@ -14,9 +14,9 @@ fn part1() -> i32 {
         let line = line.unwrap();
         println!("{}", line);
     }
-    return -1;
+    -1
 }
 
 fn part2() -> i32 {
-    return -1;
+    -1
 }

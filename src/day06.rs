@@ -17,7 +17,7 @@ fn part1() -> u64 {
     for (_i, line) in reader.lines().enumerate() {
         let line: Vec<char> = line.unwrap().chars().collect();
 
-        if line.len() == 0 {
+        if line.is_empty() {
             total += group.len() as u64;
             group = HashSet::new();
             continue;
@@ -28,7 +28,8 @@ fn part1() -> u64 {
         }
     }
     total += group.len() as u64;
-    return total;
+
+    total
 }
 
 fn part2() -> u64 {
@@ -41,7 +42,7 @@ fn part2() -> u64 {
     for (_i, line) in reader.lines().enumerate() {
         let line: Vec<char> = line.unwrap().chars().collect();
 
-        if line.len() == 0 {
+        if line.is_empty() {
             total += group.len() as u64;
             flag = true;
             continue;
@@ -56,9 +57,10 @@ fn part2() -> u64 {
             flag = false;
             group = person;
         } else {
-            group = group.intersection(&person).map(|&x| x.clone()).collect();
+            group = group.intersection(&person).copied().collect();
         }
     }
     total += group.len() as u64;
-    return total;
+
+    total
 }

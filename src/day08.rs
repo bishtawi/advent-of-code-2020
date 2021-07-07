@@ -40,7 +40,7 @@ fn part1() -> i32 {
         }
     }
 
-    return acc;
+    acc
 }
 
 fn part2() -> i32 {
@@ -84,10 +84,10 @@ fn part2() -> i32 {
         }
     }
 
-    return -1;
+    -1
 }
 
-fn execute(instructions: &Vec<Instruction>, swap: i32) -> (i32, bool) {
+fn execute(instructions: &[Instruction], swap: i32) -> (i32, bool) {
     let mut acc: i32 = 0;
     let mut i: i32 = 0;
     let mut visited: HashSet<i32> = HashSet::new();
@@ -135,7 +135,7 @@ fn parse() -> Vec<Instruction> {
     let reader = BufReader::new(file);
     for line in reader.lines() {
         let line = line.unwrap();
-        let parts: Vec<&str> = line.split(" ").collect();
+        let parts: Vec<&str> = line.split(' ').collect();
         assert!(parts.len() == 2);
         instructions.push(Instruction {
             operation: parts[0].to_string(),
@@ -143,5 +143,5 @@ fn parse() -> Vec<Instruction> {
         })
     }
 
-    return instructions;
+    instructions
 }

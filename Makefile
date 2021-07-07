@@ -1,15 +1,17 @@
 exec:
-	cargo fmt
-	cargo run
+	make fix
+	make test
+	make run
 
 build:
 	cargo build
 
-run:
-	cargo run
+fix:
+	cargo fmt
 
 test:
+	cargo clippy -- -D warnings
 	cargo test
 
-fmt:
-	cargo fmt
+run:
+	cargo run

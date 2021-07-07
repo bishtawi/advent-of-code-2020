@@ -17,7 +17,7 @@ fn part1() -> usize {
     let mut searched: HashSet<String> = HashSet::new();
     let mut to_search: Vec<&str> = [MY_BAG].to_vec();
 
-    while to_search.len() > 0 {
+    while !to_search.is_empty() {
         let target_bag = to_search.pop().unwrap();
         for (curr_bag, inner_bags) in bags.iter() {
             if inner_bags.contains_key(target_bag) && !searched.contains(curr_bag) {
@@ -27,12 +27,13 @@ fn part1() -> usize {
         }
     }
 
-    return searched.len();
+    searched.len()
 }
 
 fn part2() -> i32 {
     let bags = parse();
-    return bag_count(&bags, MY_BAG) - 1;
+
+    bag_count(&bags, MY_BAG) - 1
 }
 
 fn bag_count(bags: &HashMap<String, HashMap<String, i32>>, bag: &str) -> i32 {
@@ -41,7 +42,8 @@ fn bag_count(bags: &HashMap<String, HashMap<String, i32>>, bag: &str) -> i32 {
     for (inner_bag, count) in inner_bags.iter() {
         total += count * bag_count(bags, inner_bag);
     }
-    return total;
+
+    total
 }
 
 fn parse() -> HashMap<String, HashMap<String, i32>> {
@@ -61,7 +63,7 @@ fn parse() -> HashMap<String, HashMap<String, i32>> {
         let bag_color = split[0].strip_suffix(" bags").unwrap().to_string();
         let mut inner_bags: HashMap<String, i32> = HashMap::new();
         if split[1] != "no other bags." {
-            let bag_descs: Vec<&str> = split[1].split(",").collect();
+            let bag_descs: Vec<&str> = split[1].split(',').collect();
             for bag_desc in bag_descs {
                 match BAG.captures(bag_desc) {
                     Some(g) => {
@@ -75,5 +77,6 @@ fn parse() -> HashMap<String, HashMap<String, i32>> {
         }
         bags.insert(bag_color, inner_bags);
     }
-    return bags;
+
+    bags
 }

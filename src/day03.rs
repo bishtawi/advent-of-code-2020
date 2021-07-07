@@ -25,7 +25,7 @@ fn part1() -> i32 {
         }
         pos = (pos + 3) % len;
     }
-    return trees;
+    trees
 }
 
 fn part2() -> i64 {
@@ -70,5 +70,5 @@ fn part2() -> i64 {
         total *= count;
     }
 
-    return total;
+    total
 }

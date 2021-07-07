@@ -34,13 +34,13 @@ impl Default for Passport {
 
 impl Passport {
     fn valid(&self) -> bool {
-        return self.byr.is_some()
+        self.byr.is_some()
             && self.iyr.is_some()
             && self.eyr.is_some()
             && self.hgt.is_some()
             && self.hcl.is_some()
             && self.ecl.is_some()
-            && self.pid.is_some();
+            && self.pid.is_some()
     }
 
     fn valider(&self) -> bool {
@@ -63,7 +63,7 @@ impl Passport {
         }
         match self.byr.as_ref().unwrap().parse::<i32>() {
             Ok(val) => {
-                if val < 1920 || val > 2002 {
+                if !(1920..=2002).contains(&val) {
                     return false;
                 }
             }
@@ -76,7 +76,7 @@ impl Passport {
         }
         match self.iyr.as_ref().unwrap().parse::<i32>() {
             Ok(val) => {
-                if val < 2010 || val > 2020 {
+                if !(2010..=2020).contains(&val) {
                     return false;
                 }
             }
@@ -89,7 +89,7 @@ impl Passport {
         }
         match self.eyr.as_ref().unwrap().parse::<i32>() {
             Ok(val) => {
-                if val < 2020 || val > 2030 {
+                if !(2020..=2030).contains(&val) {
                     return false;
                 }
             }
@@ -105,12 +105,12 @@ impl Passport {
                 };
                 match &r["units"] {
                     "cm" => {
-                        if height < 150 || height > 193 {
+                        if !(150..=193).contains(&height) {
                             return false;
                         }
                     }
                     "in" => {
-                        if height < 59 || height > 76 {
+                        if !(59..=76).contains(&height) {
                             return false;
                         }
                     }
@@ -137,7 +137,7 @@ impl Passport {
             return false;
         }
 
-        return true;
+        true
     }
 }
 
@@ -155,7 +155,7 @@ fn part1() -> i32 {
         }
     }
 
-    return valid;
+    valid
 }
 
 fn part2() -> i32 {
@@ -168,7 +168,7 @@ fn part2() -> i32 {
         }
     }
 
-    return valid;
+    valid
 }
 
 fn parse() -> Vec<Passport> {
@@ -180,15 +180,15 @@ fn parse() -> Vec<Passport> {
     for line in reader.lines() {
         let line = line.unwrap();
 
-        if line == "" {
+        if line.is_empty() {
             passports.push(last);
             last = Passport::default();
             continue;
         }
 
-        let parts: Vec<&str> = line.split(" ").collect();
+        let parts: Vec<&str> = line.split(' ').collect();
         for part in parts {
-            let pair: Vec<&str> = part.split(":").collect();
+            let pair: Vec<&str> = part.split(':').collect();
             assert!(pair.len() == 2);
             let val = Some(pair[1].to_string());
             match pair[0] {
@@ -206,5 +206,5 @@ fn parse() -> Vec<Passport> {
     }
     passports.push(last);
 
-    return passports;
+    passports
 }

@@ -30,19 +30,22 @@ fn part1() -> i32 {
         }
     }
 
-    return valid;
+    valid
 }
 
+#[allow(clippy::nonminimal_bool)]
 fn part2() -> i32 {
     let entries: Vec<Entry> = parse();
 
     let mut valid: i32 = 0;
+
     for entry in entries {
         let characters: Vec<char> = entry.password.chars().collect();
         if characters.len() < entry.lower_bound as usize {
             continue;
         }
         let flag = characters[entry.lower_bound as usize - 1] == entry.letter;
+
         if (characters.len() < entry.upper_bound as usize && flag)
             || (characters[entry.upper_bound as usize - 1] != entry.letter && flag)
             || (characters[entry.upper_bound as usize - 1] == entry.letter && !flag)
@@ -51,7 +54,7 @@ fn part2() -> i32 {
         }
     }
 
-    return valid;
+    valid
 }
 
 fn parse() -> Vec<Entry> {
@@ -60,9 +63,9 @@ fn parse() -> Vec<Entry> {
     let reader = BufReader::new(file);
     for (_i, line) in reader.lines().enumerate() {
         let line = line.unwrap();
-        let parts: Vec<&str> = line.split(" ").collect();
+        let parts: Vec<&str> = line.split(' ').collect();
         assert!(parts.len() == 3);
-        let ranges: Vec<&str> = parts[0].split("-").collect();
+        let ranges: Vec<&str> = parts[0].split('-').collect();
         assert!(ranges.len() == 2);
         let lower_bound: u64 = ranges[0].parse().unwrap();
         let upper_bound: u64 = ranges[1].parse().unwrap();
@@ -78,5 +81,5 @@ fn parse() -> Vec<Entry> {
         });
     }
 
-    return entries;
+    entries
 }

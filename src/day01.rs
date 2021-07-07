@@ -1,3 +1,4 @@
+use std::collections::hash_map::Entry::Vacant;
 use std::collections::{HashMap, HashSet};
 use std::fs::File;
 use std::io::{BufRead, BufReader};
@@ -24,7 +25,7 @@ fn part1() -> i32 {
         set.insert(num);
     }
 
-    return -1;
+    -1
 }
 
 fn part2() -> i32 {
@@ -38,10 +39,10 @@ fn part2() -> i32 {
 
         list.push(num);
 
-        if entries.contains_key(&num) {
-            *entries.get_mut(&num).unwrap() += 1;
+        if let Vacant(e) = entries.entry(num) {
+            e.insert(1);
         } else {
-            entries.insert(num, 1);
+            *entries.get_mut(&num).unwrap() += 1;
         }
     }
 
@@ -67,5 +68,5 @@ fn part2() -> i32 {
         }
     }
 
-    return -1;
+    -1
 }
