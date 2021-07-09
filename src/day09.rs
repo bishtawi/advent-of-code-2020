@@ -62,11 +62,11 @@ fn part2(nums: &[i64], sum: i64) -> i64 {
         }
     }
 
-    let min = nums[start..end + 1]
+    let min = nums[start..=end]
         .iter()
         .reduce(|a, b| if a > b { b } else { a })
         .unwrap();
-    let max = nums[start..end + 1]
+    let max = nums[start..=end]
         .iter()
         .reduce(|a, b| if a > b { a } else { b })
         .unwrap();

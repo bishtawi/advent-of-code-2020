@@ -10,7 +10,7 @@ fix:
 	cargo fmt
 
 test:
-	cargo clippy -- -D warnings
+	cargo clippy
 	cargo test
 
 run:

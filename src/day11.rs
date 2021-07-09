@@ -60,16 +60,16 @@ fn iterate(mut curr_round: Vec<Vec<Spot>>, is_part1: bool) -> i32 {
                             next_round[i][j] = Spot::Available;
                         }
                     }
-                    _ => (),
+                    Spot::Floor => (),
                 }
             }
         }
 
         if curr_round == next_round {
             break;
-        } else {
-            curr_round = next_round.clone();
         }
+
+        curr_round = next_round.clone();
     }
 
     curr_round
@@ -123,135 +123,143 @@ fn adjacent_spots(
     is_part1: bool,
 ) -> Vec<(usize, usize)> {
     if is_part1 {
-        // Lacking proper bounds checking here. But that is okay as function seat_taken has bounds checks
-
-        let mut adj = vec![(row, col + 1), (row + 1, col), (row + 1, col + 1)];
-
-        if row > 0 {
-            adj.push((row - 1, col));
-            adj.push((row - 1, col + 1));
-        }
-
-        if col > 0 {
-            adj.push((row, col - 1));
-            adj.push((row + 1, col - 1));
-            if row > 0 {
-                adj.push((row - 1, col - 1));
-            }
-        }
-
-        adj
+        adjacent_spots_part1(row, col)
     } else {
-        let mut adj: Vec<(usize, usize)> = Vec::new();
-
-        // Theres probably a better way to do this...
-
-        // Row decreasing
-        {
-            let mut i = row;
-            while i > 0 {
-                i -= 1;
-                if spots[i][col] != Spot::Floor {
-                    adj.push((i, col));
-                    break;
-                }
-            }
-        }
-
-        // Row increasing
-        {
-            let mut i = row;
-            while i < spots.len() - 1 {
-                i += 1;
-                if spots[i][col] != Spot::Floor {
-                    adj.push((i, col));
-                    break;
-                }
-            }
-        }
-
-        // Column decreasing
-        {
-            let mut j = col;
-            while j > 0 {
-                j -= 1;
-                if spots[row][j] != Spot::Floor {
-                    adj.push((row, j));
-                    break;
-                }
-            }
-        }
-
-        // Column increasing
-        {
-            let mut j = col;
-            while j < spots[row].len() - 1 {
-                j += 1;
-                if spots[row][j] != Spot::Floor {
-                    adj.push((row, j));
-                    break;
-                }
-            }
-        }
-
-        // Row and column decreasing
-        {
-            let mut i = row;
-            let mut j = col;
-            while i > 0 && j > 0 {
-                i -= 1;
-                j -= 1;
-                if spots[i][j] != Spot::Floor {
-                    adj.push((i, j));
-                    break;
-                }
-            }
-        }
-
-        // Row and column increasing
-        {
-            let mut i = row;
-            let mut j = col;
-            while i < spots.len() - 1 && j < spots[row].len() - 1 {
-                i += 1;
-                j += 1;
-                if spots[i][j] != Spot::Floor {
-                    adj.push((i, j));
-                    break;
-                }
-            }
-        }
-
-        // Row decreasing
-        // Column increasing
-        {
-            let mut i = row;
-            let mut j = col;
-            while i > 0 && j < spots[row].len() - 1 {
-                i -= 1;
-                j += 1;
-                if spots[i][j] != Spot::Floor {
-                    adj.push((i, j));
-                    break;
-                }
-            }
-        }
-
-        // Row increasing
-        // Column decreasing
-        {
-            let mut i = row;
-            let mut j = col;
-            while i < spots.len() - 1 && j > 0 {
-                i += 1;
-                j -= 1;
-                if spots[i][j] != Spot::Floor {
-                    adj.push((i, j));
-                    break;
-                }
-            }
-        }
-
-        adj
+        adjacent_spots_part2(spots, row, col)
     }
+}
+
+fn adjacent_spots_part1(row: usize, col: usize) -> Vec<(usize, usize)> {
+    // Lacking proper bounds checking here. But that is okay as function seat_taken has bounds checks
+
+    let mut adj = vec![(row, col + 1), (row + 1, col), (row + 1, col + 1)];
+
+    if row > 0 {
+        adj.push((row - 1, col));
+        adj.push((row - 1, col + 1));
+    }
+
+    if col > 0 {
+        adj.push((row, col - 1));
+        adj.push((row + 1, col - 1));
+        if row > 0 {
+            adj.push((row - 1, col - 1));
+        }
+    }
+
+    adj
+}
+
+fn adjacent_spots_part2(spots: &[Vec<Spot>], row: usize, col: usize) -> Vec<(usize, usize)> {
+    // Theres probably a better way to do this...
+
+    let mut adj: Vec<(usize, usize)> = Vec::new();
+
+    // Row decreasing
+    {
+        let mut i = row;
+        while i > 0 {
+            i -= 1;
+            if spots[i][col] != Spot::Floor {
+                adj.push((i, col));
+                break;
+            }
+        }
+    }
+
+    // Row increasing
+    {
+        let mut i = row;
+        while i < spots.len() - 1 {
+            i += 1;
+            if spots[i][col] != Spot::Floor {
+                adj.push((i, col));
+                break;
+            }
+        }
+    }
+
+    // Column decreasing
+    {
+        let mut j = col;
+        while j > 0 {
+            j -= 1;
+            if spots[row][j] != Spot::Floor {
+                adj.push((row, j));
+                break;
+            }
+        }
+    }
+
+    // Column increasing
+    {
+        let mut j = col;
+        while j < spots[row].len() - 1 {
+            j += 1;
+            if spots[row][j] != Spot::Floor {
+                adj.push((row, j));
+                break;
+            }
+        }
+    }
+
+    // Row and column decreasing
+    {
+        let mut i = row;
+        let mut j = col;
+        while i > 0 && j > 0 {
+            i -= 1;
+            j -= 1;
+            if spots[i][j] != Spot::Floor {
+                adj.push((i, j));
+                break;
+            }
+        }
+    }
+
+    // Row and column increasing
+    {
+        let mut i = row;
+        let mut j = col;
+        while i < spots.len() - 1 && j < spots[row].len() - 1 {
+            i += 1;
+            j += 1;
+            if spots[i][j] != Spot::Floor {
+                adj.push((i, j));
+                break;
+            }
+        }
+    }
+
+    // Row decreasing
+    // Column increasing
+    {
+        let mut i = row;
+        let mut j = col;
+        while i > 0 && j < spots[row].len() - 1 {
+            i -= 1;
+            j += 1;
+            if spots[i][j] != Spot::Floor {
+                adj.push((i, j));
+                break;
+            }
+        }
+    }
+
+    // Row increasing
+    // Column decreasing
+    {
+        let mut i = row;
+        let mut j = col;
+        while i < spots.len() - 1 && j > 0 {
+            i += 1;
+            j -= 1;
+            if spots[i][j] != Spot::Floor {
+                adj.push((i, j));
+                break;
+            }
+        }
+    }
+
+    adj
 }

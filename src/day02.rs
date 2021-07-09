@@ -33,7 +33,7 @@ fn part1() -> i32 {
     valid
 }
 
-#[allow(clippy::nonminimal_bool)]
+#[allow(clippy::nonminimal_bool, clippy::cast_possible_truncation)]
 fn part2() -> i32 {
     let entries: Vec<Entry> = parse();
 

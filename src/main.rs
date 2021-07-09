@@ -1,4 +1,4 @@
-#![deny(clippy::all)]
+#![deny(clippy::all, clippy::pedantic)]
 
 mod day01;
 mod day02;

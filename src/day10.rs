@@ -39,19 +39,17 @@ fn part2(jolts: &[i32]) -> u64 {
     let mut mem: HashMap<i32, u64> = HashMap::new();
     mem.insert(jolts.last().unwrap() + 3, 1);
     for jolt in jolts.iter().rev() {
-        let total: u64 = [1, 2, 3].iter().fold(0, |a, d| {
-            if let Some(val) = mem.get(&(jolt + d)) {
-                a + val
-            } else {
-                a
-            }
+        let total: u64 = [1, 2, 3].iter().fold(0, |a, d| match mem.get(&(jolt + d)) {
+            Some(val) => a + val,
+            None => a,
         });
         mem.insert(*jolt, total);
     }
 
-    let total: u64 = [1, 2, 3]
-        .iter()
-        .fold(0, |a, d| if let Some(v) = mem.get(&d) { a + v } else { a });
+    let total: u64 = [1, 2, 3].iter().fold(0, |a, d| match mem.get(&d) {
+        Some(v) => a + v,
+        None => a,
+    });
 
     total
 

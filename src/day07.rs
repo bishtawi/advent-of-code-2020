@@ -19,7 +19,7 @@ fn part1() -> usize {
 
     while !to_search.is_empty() {
         let target_bag = to_search.pop().unwrap();
-        for (curr_bag, inner_bags) in bags.iter() {
+        for (curr_bag, inner_bags) in &bags {
             if inner_bags.contains_key(target_bag) && !searched.contains(curr_bag) {
                 to_search.push(curr_bag);
                 searched.insert(curr_bag.to_string());

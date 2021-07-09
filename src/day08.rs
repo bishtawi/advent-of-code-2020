@@ -23,12 +23,13 @@ fn part1() -> i32 {
 
     loop {
         assert!(i >= 0);
+
+        #[allow(clippy::cast_sign_loss)]
         let instruction = &instructions[i as usize];
         if visited.contains(&i) {
             break;
-        } else {
-            visited.insert(i);
         }
+        visited.insert(i);
         match instruction.operation.as_str() {
             "acc" => {
                 acc += instruction.argument;
@@ -51,12 +52,13 @@ fn part2() -> i32 {
 
     loop {
         assert!(i >= 0);
+
+        #[allow(clippy::cast_sign_loss)]
         let instruction = &instructions[i as usize];
         if visited.contains(&i) {
             break;
-        } else {
-            visited.insert(i);
         }
+        visited.insert(i);
         match instruction.operation.as_str() {
             "acc" => {
                 i += 1;
@@ -97,12 +99,12 @@ fn execute(instructions: &[Instruction], swap: i32) -> (i32, bool) {
         if i >= instructions.len().try_into().unwrap() {
             return (acc, true);
         }
+        #[allow(clippy::cast_sign_loss)]
         let instruction = &instructions[i as usize];
         if visited.contains(&i) {
             return (acc, false);
-        } else {
-            visited.insert(i);
         }
+        visited.insert(i);
         let mut op = instruction.operation.as_str();
         if swap == i {
             op = match op {
