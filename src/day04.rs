@@ -191,8 +191,7 @@ fn parse() -> Vec<Passport> {
             let pair: Vec<&str> = part.split(':').collect();
             assert_eq!(pair.len(), 2);
             let val = Some(pair[1].to_string());
-            #[allow(clippy::match_on_vec_items)]
-            match pair[0] {
+            match *pair.get(0).unwrap() {
                 "byr" => last.byr = val,
                 "iyr" => last.iyr = val,
                 "eyr" => last.eyr = val,
