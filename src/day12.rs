@@ -144,7 +144,7 @@ fn turn_left(mut direction: Direction, degrees: i32) -> Direction {
             Direction::South => Direction::East,
             Direction::East => Direction::North,
         };
-        turns -= 1
+        turns -= 1;
     }
     direction
 }
@@ -158,7 +158,7 @@ fn turn_right(mut direction: Direction, degrees: i32) -> Direction {
             Direction::South => Direction::West,
             Direction::West => Direction::North,
         };
-        turns -= 1
+        turns -= 1;
     }
     direction
 }

@@ -142,7 +142,7 @@ fn parse() -> Vec<Instruction> {
         instructions.push(Instruction {
             operation: parts[0].to_string(),
             argument: parts[1].parse().unwrap(),
-        })
+        });
     }
 
     instructions

@@ -63,7 +63,7 @@ fn parse() -> Vec<i32> {
                     _ => panic!(),
                 };
             } else {
-                panic!()
+                panic!();
             }
         }
         assert!(low_row == high_row);

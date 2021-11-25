@@ -75,7 +75,7 @@ fn calc(line: &str) -> u64 {
         } else if c == ' ' {
             continue;
         } else {
-            panic!()
+            panic!();
         }
     }
 

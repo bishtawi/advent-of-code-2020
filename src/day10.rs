@@ -46,7 +46,7 @@ fn part2(jolts: &[i32]) -> u64 {
         mem.insert(*jolt, total);
     }
 
-    let total: u64 = [1, 2, 3].iter().fold(0, |a, d| match mem.get(&d) {
+    let total: u64 = [1, 2, 3].iter().fold(0, |a, d| match mem.get(d) {
         Some(v) => a + v,
         None => a,
     });

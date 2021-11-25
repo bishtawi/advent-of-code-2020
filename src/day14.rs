@@ -28,7 +28,7 @@ fn part1(instructions: &[Instruction]) -> u64 {
     for instruction in instructions {
         match instruction {
             Instruction::Mask(mask) => {
-                let (and, or) = build_bit_masks(&mask);
+                let (and, or) = build_bit_masks(mask);
                 cur_and = and;
                 cur_or = or;
             }
