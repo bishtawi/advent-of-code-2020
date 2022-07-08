@@ -6,6 +6,7 @@ use regex::Regex;
 
 const INPUT: &str = "input/day04.txt";
 
+#[derive(Default)]
 struct Passport {
     byr: Option<String>,
     iyr: Option<String>,
@@ -15,21 +16,6 @@ struct Passport {
     ecl: Option<String>,
     pid: Option<String>,
     cid: Option<String>,
-}
-
-impl Default for Passport {
-    fn default() -> Self {
-        Passport {
-            byr: None,
-            iyr: None,
-            eyr: None,
-            hgt: None,
-            hcl: None,
-            ecl: None,
-            pid: None,
-            cid: None,
-        }
-    }
 }
 
 impl Passport {

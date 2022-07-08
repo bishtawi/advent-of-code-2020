@@ -1,4 +1,8 @@
+#![forbid(unsafe_code)]
 #![deny(clippy::all, clippy::pedantic)]
+
+use anyhow::{anyhow, bail, Result};
+use std::env;
 
 mod day01;
 mod day02;
@@ -20,24 +24,34 @@ mod day17;
 mod day18;
 mod day19;
 
-fn main() {
-    day19::solve();
-    day18::solve();
-    day17::solve();
-    day16::solve();
-    day15::solve();
-    day14::solve();
-    day13::solve();
-    day12::solve();
-    day11::solve();
-    day10::solve();
-    day09::solve();
-    day08::solve();
-    day07::solve();
-    day06::solve();
-    day05::solve();
-    day04::solve();
-    day03::solve();
-    day02::solve();
-    day01::solve();
+fn main() -> Result<()> {
+    let day = env::args()
+        .nth(1)
+        .ok_or_else(|| anyhow!("Missing day argument"))?
+        .parse::<u8>()?;
+
+    (match day {
+        1 => day01::solve(),
+        2 => day02::solve(),
+        3 => day03::solve(),
+        4 => day04::solve(),
+        5 => day05::solve(),
+        6 => day06::solve(),
+        7 => day07::solve(),
+        8 => day08::solve(),
+        9 => day09::solve(),
+        10 => day10::solve(),
+        11 => day11::solve(),
+        12 => day12::solve(),
+        13 => day13::solve(),
+        14 => day14::solve(),
+        15 => day15::solve(),
+        16 => day16::solve(),
+        17 => day17::solve(),
+        18 => day18::solve(),
+        19 => day19::solve(),
+        _ => bail!("Invalid day {}", day),
+    });
+
+    Ok(())
 }

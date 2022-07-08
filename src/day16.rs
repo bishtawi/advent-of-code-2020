@@ -4,21 +4,11 @@ use std::io::{BufRead, BufReader};
 
 const INPUT: &str = "input/day16.txt";
 
-#[derive(Debug)]
+#[derive(Debug, Default)]
 struct Input {
     rules: HashMap<String, Vec<(u64, u64)>>,
     my_ticket: Vec<u64>,
     nearby_tickets: Vec<Vec<u64>>,
-}
-
-impl Default for Input {
-    fn default() -> Self {
-        Input {
-            rules: HashMap::new(),
-            my_ticket: Vec::new(),
-            nearby_tickets: Vec::new(),
-        }
-    }
 }
 
 pub fn solve() {
